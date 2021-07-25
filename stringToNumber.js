@@ -55,7 +55,7 @@ const en = {
 	million: 1000000
 };
 
-const nlNumber = (getalString, result = 0) => {
+const nlNumber = (getalString, result = 0, lastPowerValue = 1) => {
 	if (nl.hasOwnProperty(getalString)) {
 		result = result + nl[getalString];
 	} else {
@@ -73,13 +73,18 @@ const nlNumber = (getalString, result = 0) => {
 					numLast = entry[1];
 					if (powerOfIndex > indexLast) {
 						numLast = powerOfValue * entry[1];
+						lastPowerValue = powerOfValue
 					}
 				}
 			}
 		});
-		result += numLast;
+		if (lastPowerValue > powerOfValue) {
+			result += lastPowerValue * numLast;
+		} else {
+			result += numLast;
+		}
 		if (getalString.slice(0, indexLast).length > 0) {
-			result = nlNumber(getalString.slice(0, indexLast), result);
+			result = nlNumber(getalString.slice(0, indexLast), result, lastPowerValue);
 		}
 	}
 
