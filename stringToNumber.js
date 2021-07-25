@@ -25,7 +25,7 @@ const nl = {
 	honderd: 100,
 	duizend: 1000,
 	miljoen: 1000000
-}
+};
 const en = {
 	one: 1,
 	two: 2,
@@ -53,38 +53,54 @@ const en = {
 	hundred: 100,
 	thousand: 1000,
 	million: 1000000
-}
+};
 
+const nlNumber = (getalString, result = 0) => {
+	console.log('nlNumber', {getalString, result});
+	if (nl.hasOwnProperty(getalString)) {
+		result = result + nl[getalString];
+	} else {
+		let indexLast = 0;
+		let numLast = 0;
+		Object.entries(nl).forEach(entry => {
+			if (getalString.lastIndexOf(entry[0]) >= indexLast) {
+				indexLast = getalString.lastIndexOf(entry[0]);
+				numLast = entry[1];
+			}
+		});
+		result += numLast;
+		if (getalString.slice(0, indexLast).length > 0) {
+			result = nlNumber(getalString.slice(0, indexLast), result);
+		}
+	}
 
-const nlNumber = (str, result = 0) => {
-
-	if (nl.hasOwnProperty(str)) {
-		result = nl[str]
+	return result;
+};
+const enNumber = (str, result = 0) => {
+	if (en.hasOwnProperty(str)) {
+		result = en[str];
 	} else {
 
 	}
+};
 
-	return result
-}
-const enNumber = (str) => {
-	return str
-}
-
-const stringToNumber = (str, lang = 'nl') => {
-	console.log('input', str);
+const stringToNumber = (getalString, lang = 'nl') => {
+	console.log('input', getalString);
 	if (lang === 'nl') {
-		console.log('nl output', nlNumber(str));
-		return nlNumber(str);
+		console.log('nl output', nlNumber(getalString));
+
+		return nlNumber(getalString);
 	} else if (lang === 'en') {
-		console.log('en output',enNumber(str));
-		return enNumber(str);
+		console.log('en output', enNumber(getalString));
+
+		return enNumber(getalString);
 	}
-	return num;
-}
+	return 'nog niets';
+};
 stringToNumber('drie');
 stringToNumber('twaalf');
 stringToNumber('vierendertig');
-stringToNumber('vierëndertig');
+// stringToNumber('vierëndertig');
 
 // stringToNumber('hundredthirtyfour', 'en');
 // stringToNumber('onemilliontweehundredtwelvethousandhundredsixtyfive', 'en');
