@@ -1,5 +1,8 @@
 const nl = {
 	een: 1,
+	honderd: 100,
+	duizend: 1000,
+	miljoen: 1000000,
 	twee: 2,
 	drie: 3,
 	vier: 4,
@@ -21,10 +24,7 @@ const nl = {
 	zestig: 60,
 	zeventig: 70,
 	tachtig: 80,
-	negentig: 90,
-	honderd: 100,
-	duizend: 1000,
-	miljoen: 1000000
+	negentig: 90
 };
 const en = {
 	one: 1,
@@ -61,11 +61,19 @@ const nlNumber = (getalString, result = 0) => {
 	} else {
 		let indexLast = 0;
 		let numLast = 0;
+		let powerOfIndex = 0;
+		let powerOfValue = 1;
 		Object.entries(nl).forEach(entry => {
-			if (getalString.includes(entry[0])){
-				if (numLast === 10 || getalString.lastIndexOf(entry[0]) >= indexLast) {
+			if (getalString.includes(entry[0])) {
+				if ((entry[1] === 100 || entry[1] === 1000 || entry[1] === 1000000) && getalString.lastIndexOf(entry[0]) >= powerOfIndex) {
+					powerOfIndex = getalString.lastIndexOf(entry[0]);
+					powerOfValue = entry[1];
+				} else if (numLast === 10 || getalString.lastIndexOf(entry[0]) >= indexLast) {
 					indexLast = getalString.lastIndexOf(entry[0]);
 					numLast = entry[1];
+					if (powerOfIndex > indexLast) {
+						numLast = powerOfValue * entry[1];
+					}
 				}
 			}
 		});
@@ -100,8 +108,6 @@ const stringToNumber = (getalString, lang = 'nl') => {
 };
 stringToNumber('drie');
 stringToNumber('twaalf');
-// stringToNumber('dertien');
-// stringToNumber('veertien');
 stringToNumber('zestien');
 stringToNumber('zeventien');
 
@@ -110,10 +116,11 @@ stringToNumber('vierëndertig');
 stringToNumber('honderdelf');
 stringToNumber('honderddertien');
 stringToNumber('tweehonderdvijfendertig');
-// stringToNumber('tweehonderdvijfëndertig');
+stringToNumber('tweehonderdvijfëndertig');
+stringToNumber('duizendtweehonderdvijfëndertig');
+stringToNumber('zesenzestigduizend tweehonderdvijfëndertig');
+stringToNumber('vierhonderd dertigduizend tweehonderdvijfëndertig');
 
-// stringToNumber('hundredthirtyfour', 'en');
-// stringToNumber('onemilliontweehundredtwelvethousandhundredsixtyfive', 'en');
 // stringToNumber('fourthousanddriehundredfourteen', 'en');
 // stringToNumber('vijfmiljoentweehonderdtwaalfduizendhonderdvijfënzestig', 'en');
 // stringToNumber('fourthousanddriehundredfourteen', 'en');
