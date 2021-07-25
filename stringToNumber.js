@@ -73,7 +73,7 @@ const nlNumber = (getalString, result = 0, lastPowerValue = 1) => {
 					numLast = entry[1];
 					if (powerOfIndex > indexLast) {
 						numLast = powerOfValue * entry[1];
-						lastPowerValue = powerOfValue
+						lastPowerValue = powerOfValue;
 					}
 				}
 			}
