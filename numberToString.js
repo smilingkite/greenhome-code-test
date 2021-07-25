@@ -67,7 +67,7 @@ const nlString = (num) => {
 		if (num < 100) {
 			let rest = num % 10;
 			let tiental = num - rest;
-			return nl[rest] + (tiental > 10 ? 'en' : '') + nl[tiental];
+			return nl[rest] + (tiental > 10 ? 'ën' : '') + nl[tiental];
 		} else if (num < 1000) {
 			let rest = num % 100;
 			let honderdtal = (num - (rest)) / 100;
@@ -79,7 +79,7 @@ const nlString = (num) => {
 		} else {
 			let rest = num % 1000000;
 			let miljoental = (num - (rest)) / 1000000;
-			return nlString(miljoental) + nl[miljoental] + nlString(rest);
+			return nlString(miljoental) + nl[1000000] + nlString(rest);
 		}
 	}
 };
@@ -109,12 +109,6 @@ const enString = (num) => {
 	}
 };
 
-const nlNumber = (str) => {
-	return str
-}
-const enNumber = (str) => {
-	return str
-}
 
 const numberToString = (num, lang = 'nl') => {
 	console.log('input', num);
@@ -128,17 +122,6 @@ const numberToString = (num, lang = 'nl') => {
 	return num;
 };
 
-const stringToNumber = (str, lang = 'nl') => {
-	console.log('input', str);
-	if (lang === 'nl') {
-		console.log('nl output', nlNumber(str));
-		return nlNumber(str);
-	} else if (lang === 'en') {
-		console.log('en output',enNumber(str));
-		return enNumber(str);
-	}
-	return num;
-}
 
 numberToString(3);
 numberToString(12);
@@ -172,5 +155,4 @@ numberToString(212165, 'en');
 numberToString(5212165, 'en');
 numberToString(1212165, 'en');
 
-stringToNumber('drie');
-stringToNumber('hundredthirtyfour', 'en');
+
