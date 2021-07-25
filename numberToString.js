@@ -75,11 +75,11 @@ const nlString = (num) => {
 		} else if (num < 1000000) {
 			let rest = num % 1000;
 			let duizendTal = (num - (rest)) / 1000;
-			return checkForOne(duizendTal, nlString(duizendTal)) + nl[1000] + nlString(rest);
+			return checkForOne(duizendTal, nlString(duizendTal)) + nl[1000] + ' ' + nlString(rest);
 		} else {
 			let rest = num % 1000000;
 			let miljoental = (num - (rest)) / 1000000;
-			return nlString(miljoental) + nl[1000000] + nlString(rest);
+			return nlString(miljoental) + ' ' + nl[1000000] +  ' ' + nlString(rest);
 		}
 	}
 };
