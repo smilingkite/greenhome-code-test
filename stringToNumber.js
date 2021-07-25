@@ -85,6 +85,7 @@ const nlNumber = (getalString, result = 0) => {
 
 	return result;
 };
+
 const enNumber = (str, result = 0) => {
 	if (en.hasOwnProperty(str)) {
 		result = en[str];
@@ -113,12 +114,14 @@ stringToNumber('zeventien');
 
 stringToNumber('vierendertig');
 stringToNumber('vierëndertig');
-stringToNumber('honderdelf');
+stringToNumber('tweehonderdelf');
 stringToNumber('honderddertien');
 stringToNumber('tweehonderdvijfendertig');
 stringToNumber('tweehonderdvijfëndertig');
 stringToNumber('duizendtweehonderdvijfëndertig');
-stringToNumber('zesenzestigduizend tweehonderdvijfëndertig');
+stringToNumber('tweeduizend tweehonderdvijfëndertig');
+stringToNumber('dertigduizend tweehonderdvijfëndertig');
+stringToNumber('eenendertigduizend tweehonderdvijfëndertig');
 stringToNumber('vierhonderd dertigduizend tweehonderdvijfëndertig');
 
 // stringToNumber('fourthousanddriehundredfourteen', 'en');
