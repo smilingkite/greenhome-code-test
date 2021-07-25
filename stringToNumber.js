@@ -56,16 +56,17 @@ const en = {
 };
 
 const nlNumber = (getalString, result = 0) => {
-	console.log('nlNumber', {getalString, result});
 	if (nl.hasOwnProperty(getalString)) {
 		result = result + nl[getalString];
 	} else {
 		let indexLast = 0;
 		let numLast = 0;
 		Object.entries(nl).forEach(entry => {
-			if (getalString.lastIndexOf(entry[0]) >= indexLast) {
-				indexLast = getalString.lastIndexOf(entry[0]);
-				numLast = entry[1];
+			if (getalString.includes(entry[0])){
+				if (numLast === 10 || getalString.lastIndexOf(entry[0]) >= indexLast) {
+					indexLast = getalString.lastIndexOf(entry[0]);
+					numLast = entry[1];
+				}
 			}
 		});
 		result += numLast;
@@ -99,8 +100,17 @@ const stringToNumber = (getalString, lang = 'nl') => {
 };
 stringToNumber('drie');
 stringToNumber('twaalf');
+// stringToNumber('dertien');
+// stringToNumber('veertien');
+stringToNumber('zestien');
+stringToNumber('zeventien');
+
 stringToNumber('vierendertig');
-// stringToNumber('vierëndertig');
+stringToNumber('vierëndertig');
+stringToNumber('honderdelf');
+stringToNumber('honderddertien');
+stringToNumber('tweehonderdvijfendertig');
+// stringToNumber('tweehonderdvijfëndertig');
 
 // stringToNumber('hundredthirtyfour', 'en');
 // stringToNumber('onemilliontweehundredtwelvethousandhundredsixtyfive', 'en');
